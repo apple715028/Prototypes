@@ -84,10 +84,6 @@ new Foo()得到一個新對象（我們叫他a），這個新對象a內部地被
 
 事實上，這個使大多數JS開發者無法理解的秘密，是因為new Foo()函數調用實際上幾乎和建立鏈接的處理沒有任何直接關係。**它是某種偶然的副作用。** new Foo()是一個間接的，迂迴的方法來得到我們想要的：**一個被鏈接到另一個對象的對象。**
 
-**名稱的意義何在？**
-
-
-
 
 ---
 
@@ -96,6 +92,7 @@ new Foo()得到一個新對象（我們叫他a），這個新對象a內部地被
  **繼承是什麼？**
 我們回歸本質上來思考 **繼承的目的是什麼**，在程式開發時的目的通常是為了擴充原有的物件定義不足之處。
 
+**名稱的意義何在？**
 在JavaScript中，我們不從一個對象（“類”）向另一個對象（“實例”）拷貝。我們在對象之間製造鏈接。對於[[Prototype]]機制，視覺上，箭頭的移動方向是從右至左，由下至上。
 
 ![](https://i.imgur.com/ioURkPo.png)
@@ -191,8 +188,6 @@ console.log(a.__proto__ === b.__proto__); // true
 
 ---
 
-# 
-
  __ proto __ 像動物體內的基因，存在於每一個物件，影響物件的行為和屬性：顏色，足數目，叫聲，是否飛行…等。prototype 像母雞身上的基因，通過 prototype-base-orient 把自身的 prototype 遺傳到下一代小雞身上的基因 __ proto __。
 
 ![](https://i.imgur.com/vk64Pi3.jpg)
@@ -202,8 +197,6 @@ console.log(a.__proto__ === b.__proto__); // true
 ### 類別的繼承
 
 類別的繼承方式，在JavaScript可以用Object.create方法模擬出來
-
-
 
 ---
 
@@ -265,7 +258,8 @@ class VipPlayer extends Player {
 ```js
 function  Foo () {
 	 // ... 
-} Foo . prototype . constructor === Foo; // true var a = new Foo ();
+} 
+Foo . prototype . constructor === Foo; // true var a = new Foo ();
  a . constructor === Foo; // true
 
 ```
