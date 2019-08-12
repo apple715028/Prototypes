@@ -153,7 +153,7 @@ Object.create(..)憑空創建了一個“新”對象，並將這個新對象內
 
 ---
 
-![](https://i.imgur.com/QnjnsTR.png =300x)
+![](https://i.imgur.com/QnjnsTR.png)
 
 ---
 
@@ -185,7 +185,7 @@ console.log(a.__proto__ === b.__proto__); // true
 
 ---
 
-![](https://i.imgur.com/jKhZeBA.png =600x)
+![](https://i.imgur.com/jKhZeBA.png)
 * 當say() 加入到物件 b，只要把 say() 加到 Foo.prototype 物件，b就會從它身上繼承過來。
 * 如上圖，b.__proto__ 開放接口[[Prototype]] 指向Foo.prototype 物件，把自身的 prototype 從 Foo 物件繼承過來。
 
@@ -196,7 +196,7 @@ console.log(a.__proto__ === b.__proto__); // true
 
  __ proto __ 像動物體內的基因，存在於每一個物件，影響物件的行為和屬性：顏色，足數目，叫聲，是否飛行…等。prototype 像母雞身上的基因，通過 prototype-base-orient 把自身的 prototype 遺傳到下一代小雞身上的基因 __ proto __。
 
-![](https://i.imgur.com/vk64Pi3.jpg =500x)
+![](https://i.imgur.com/vk64Pi3.jpg)
 
 ---
 
