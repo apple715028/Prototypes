@@ -1,6 +1,7 @@
 
 #  原型（Prototype）
 
+---
 
 注意：所有模擬類拷貝行為的企圖，也就是我們在前面第四章描述的內容，稱為各種種類的“mixin”，和我們要在本章中講解的[[Prototype]]鏈機製完全不同。
 
@@ -62,11 +63,42 @@ for ( var k in myObject) {
 * 所以，當你以各種方式進行屬性查詢時，[[Prototype]]鏈就會一個鏈接一個鏈接地被查詢。一旦找到屬性或者鏈條終結，這種查詢就會停止。
 
 ---
+**“類”函數**
+
+在JavaScript中有一種奇異的行為被無恥地濫用了許多年來山寨成某些看起來**像“類”的**東西。
+
+“某種程度的類”這種奇特的行為取決於函數的一個奇怪的性質：所有的函數默認都會得到一個公有的，不可枚舉的屬性，稱為prototype，它可以指向任意的對象。
+
+```JS
+function  Foo () {
+	 // ...
+}
+
+var a =  new  Foo ();
+
+Object . getPrototypeOf ( a ) ===  Foo . prototype ; // true
+```
+當通過調用new Foo()創建a時，會發生的事情之一（見第二章了解所有四個步驟）是，a得到一個內部[[Prototype]]鏈接，此鏈接鏈到Foo.prototype所指向的對象。
+
+new Foo()得到一個新對象（我們叫他a），這個新對象a內部地被[[Prototype]]鏈接至Foo.prototype對象。
+
+事實上，這個使大多數JS開發者無法理解的秘密，是因為new Foo()函數調用實際上幾乎和建立鏈接的處理沒有任何直接關係。**它是某種偶然的副作用。** new Foo()是一個間接的，迂迴的方法來得到我們想要的：**一個被鏈接到另一個對象的對象。**
+
+**名稱的意義何在？**
+
+
+
+
+---
+
 
 # （原型）繼承
  **繼承是什麼？**
-
 我們回歸本質上來思考 **繼承的目的是什麼**，在程式開發時的目的通常是為了擴充原有的物件定義不足之處。
+
+在JavaScript中，我們不從一個對象（“類”）向另一個對象（“實例”）拷貝。我們在對象之間製造鏈接。對於[[Prototype]]機制，視覺上，箭頭的移動方向是從右至左，由下至上。
+
+![](https://i.imgur.com/ioURkPo.png)
 
 ---
 
@@ -75,9 +107,6 @@ for ( var k in myObject) {
 1. 類別的繼承(Classical inheritance)
 2. 原型為基礎的繼承(Prototype-based inheritance)
 
----
-
-### 原型繼承
 “繼承”意味著拷貝操作，而JavaScript不拷貝對象屬性（原生上，默認地）。相反，JS在兩個對象間建立鏈接，一個對象實質上可以將對屬性/函數的訪問委託到另一個對像上。對於描述JavaScript對象鏈接機制來說，“委託”是一個準確得多的術語。
 
 
@@ -85,17 +114,17 @@ for ( var k in myObject) {
 
 ```js
 function  Foo ( name ) {
-	 this . name  = name; 
-} Foo . prototype . myName = function () {
-	 return this . name ; 
-}; function Bar ( name , label ) {
-	 Foo . call ( this , name );
-	 this . label = label; 
-} //這裡，我們創建一個新的`Bar.prototype`鏈接鏈到`Foo.prototype` Bar .. myLabel (); // "obj a"
+	this . name  = name; 
+} 
+Foo . prototype . myName = function () {
+	return this . name ; 
+}; 
+function Bar ( name , label ) {
+	Foo . call ( this , name );
+	this . label = label; 
+} //這裡，我們創建一個新的`Bar.prototype`鏈接鏈到`Foo.prototype` 
+Bar .. myLabel (); // "obj a"
    
-
-  
-
 
 prototype  =  Object . create ( Foo . prototype );
 //注意！現在`Bar.prototype.constructor`不存在了，
@@ -231,6 +260,8 @@ class VipPlayer extends Player {
 ---
 
 # 建構式(Constructor) 
+
+---
 
 ```js
 function  Foo () {
