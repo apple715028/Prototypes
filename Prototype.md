@@ -122,7 +122,8 @@ Foo . prototype . myName = function () {
 function Bar ( name , label ) {
 	Foo . call ( this , name );
 	this . label = label; 
-} //這裡，我們創建一個新的`Bar.prototype`鏈接鏈到`Foo.prototype` 
+} 
+//這裡，我們創建一個新的`Bar.prototype`鏈接鏈到`Foo.prototype` 
 Bar .. myLabel (); // "obj a"
    
 
@@ -150,8 +151,6 @@ Object.create(..)憑空創建了一個“新”對象，並將這個新對象內
 **[[prototype]] vs proto vs prototype**
 :  Object 之間可以互相成為各自的 Prototype，被繼承的 Object 將會繼承父 Object 的 Prototype 所有屬性。[[Prototype]]，是一個設定（寫入） Object 的 Prototype 的接口，是一個內部屬性(internal property)，它並不允許外部存取。
 
-
----
 
 ![](https://i.imgur.com/QnjnsTR.png)
 
